@@ -1,0 +1,27 @@
+{
+  "locale": ["en"],
+  "service": "DESK",
+  "storage": false,
+  "type": "personal",
+  "whiteListedDomains": [
+    "https://devrrhh.iie.cl"
+  ],
+  "modules": {
+    "widgets": [
+      {
+        "location": "desk.ticket.detail.rightpanel",
+        "url": "/app/widget.html",
+        "name": "Data Lookup Docente Más",
+        "logo": "/app/img/logo.png",
+        "icon": "/app/img/icon.png"
+      }
+    ]
+  },
+  "cspDomains": {
+    "connect-src": ["https://devrrhh.iie.cl"]
+  },
+  "zohoAuthorisation": {},
+  "connectors": [],
+  "config": [],
+  "moduleSupport": true
+}

@@ -1,0 +1,135 @@
+body {
+  font-family: Arial, sans-serif;
+  padding: 10px;
+  background: #f9fafb;
+  position: relative;
+}
+
+h2 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: #333;
+}
+
+.reload-button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.reload-button img {
+  width: 100%;
+  height: 100%;
+}
+
+.user-info {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.user__field {
+  display: flex;
+  flex-direction: column;
+}
+
+.user__field label {
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 3px;
+  color: #555;
+}
+
+.user__field input {
+  padding: 6px 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 13px;
+  color: #333;
+}
+
+.user__field input[readonly] {
+  background-color: #f3f3f3;
+}
+
+.load-panel {
+  position: fixed;
+  background-color: rgba(53, 71, 230, 0.541);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+}
+
+.load-panel.active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.load-panel.inactive {
+  display: none;
+}
+
+.lds-dual-ring {
+  color: white;
+}
+
+.lds-dual-ring,
+.lds-dual-ring:after {
+  box-sizing: border-box;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6.4px solid currentColor;
+  border-color: currentColor transparent currentColor transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.copy-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.copy-btn {
+  border: none;
+  background: #f3f3f3;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.copy-btn:hover {
+  background: #e1e1e1;
+}
