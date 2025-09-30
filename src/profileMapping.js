@@ -21,7 +21,10 @@ export const profileMapping = {
     { key: "dependencia", label: "Dependencia" },
     { key: "rut_sostenedor", label: "RUT Sostenedor" },
     { key: "nombre_sostenedor", label: "Nombre Sostenedor" },
-    //BENEFICIOS
+    { key: "a19ñ", label: "Beneficio: 19Ñ" },
+    { key: "avolun", label: "Beneficio: Tramo Voluntario" },
+    { key: "uaplaza", label: "Beneficio: Aplazamiento Proceso Evaluativo" },
+    
     { key: "estado_susp", label: "Estado Solicitud Suspensión" },
   ],
   //SOSTENEDOR
@@ -42,6 +45,21 @@ export const profileMapping = {
     { key: "ultimo_ingreso", label: "Último acceso" },
   ],
   director: [
+    { key: "rut", label: "RUT" },
+    { key: "dv", label: "Dígito Verificador" },
+    { key: "nombres", label: "Nombres" },
+    { key: "primer_apellido", label: "Primer Apellido" },
+    { key: "segundo_apellido", label: "Segundo Apellido" },
+    { key: "correo_electronico", label: "Email" },
+    { key: "numero_contacto_1", label: "Teléfono" },
+    { key: "rbd", label: "RBD" },
+    { key: "nombre_establecimiento", label: "Nombre Establecimiento" },
+    { key: "dependencia", label: "Dependencia" },
+    { key: "rut_sostenedor", label: "RUT Sostenedor" },
+    { key: "nombre_sostenedor", label: "Nombre Sostenedor" },
+    { key: "ultimo_ingreso", label: "Último acceso" },
+  ],
+  coordinador_grabacion: [
     { key: "rut", label: "RUT" },
     { key: "dv", label: "Dígito Verificador" },
     { key: "nombres", label: "Nombres" },

@@ -4,6 +4,7 @@
   "storage": false,
   "type": "personal",
   "whiteListedDomains": [
+    "https://dashboard-edd.iie.cl",
     "https://devrrhh.iie.cl"
   ],
   "modules": {
@@ -18,7 +19,7 @@
     ]
   },
   "cspDomains": {
-    "connect-src": ["https://devrrhh.iie.cl"]
+    "connect-src": ["https://devrrhh.iie.cl", "https://dashboard-edd.iie.cl"]
   },
   "zohoAuthorisation": {},
   "connectors": [],

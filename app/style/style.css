@@ -1,8 +1,9 @@
 body {
   font-family: Arial, sans-serif;
-  padding: 10px;
+  padding: 0;
   background: #f9fafb;
   position: relative;
+  margin: 0;
 }
 
 h2 {
@@ -11,13 +12,33 @@ h2 {
   color: #333;
 }
 
+.header {
+  background-color: #2c334d;
+  width: 100%;
+  padding: 7px 10px;
+  box-sizing: border-box;
+  min-height: 35px;
+  position: relative;
+}
+
+.profile{
+  color: #f0f0f0;
+  margin: 0;
+}
+
 .reload-button {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
   width: 30px;
   height: 30px;
   cursor: pointer;
+  transition-duration: 150ms;
+}
+
+.reload-button:hover{
+  scale: 1.1;
 }
 
 .reload-button img {
@@ -28,7 +49,8 @@ h2 {
 .user-info {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  /* gap: 10px; */
+  /* padding: 10px 10px; */
 }
 
 .user__field {
@@ -125,11 +147,85 @@ h2 {
   border: none;
   background: #f3f3f3;
   cursor: pointer;
-  padding: 4px 6px;
+  padding: 0;
   border-radius: 4px;
   font-size: 14px;
+  width: 17px;
+  height: 17px;
+  transition-duration: 150ms;
+}
+
+.copy-btn img{
+  width: 100%;
+  height: 100%;
 }
 
 .copy-btn:hover {
   background: #e1e1e1;
+}
+
+.input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding-right: 30px; 
+  box-sizing: border-box;
+}
+
+.input-wrapper .copy-btn {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.6;
+}
+
+.input-wrapper .copy-btn:hover {
+  opacity: 1;
+}
+
+.profile-section {
+  border: 1px solid #ddd;
+  /* border-radius: 6px; */
+  /* margin-bottom: 10px; */
+  background: #fff;
+}
+
+.profile-header {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f3f3f3;
+  border-bottom: 1px solid #ddd;
+}
+
+.profile-header h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.profile-header .arrow {
+  font-size: 12px;
+  color: #666;
+}
+
+.profile-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  padding: 10px 10px;
+}
+
+.profile-content.inactive {
+  display: none;
 }
