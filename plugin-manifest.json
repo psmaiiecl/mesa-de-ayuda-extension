@@ -12,7 +12,7 @@
       {
         "location": "desk.ticket.detail.rightpanel",
         "url": "/app/widget.html",
-        "name": "Data Lookup Docente Más",
+        "name": "Informacion Docente Mas",
         "logo": "/app/img/logo.png",
         "icon": "/app/img/icon.png"
       }

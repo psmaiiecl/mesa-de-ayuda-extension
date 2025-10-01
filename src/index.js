@@ -83,9 +83,12 @@ function renderProfiles(profiles) {
     const section = document.createElement("div");
     section.classList.add("profile-section");
 
+    let perfilParseado = `${profile.replaceAll("_", " ")}`;
+  
+
     section.innerHTML = `
       <div class="profile-header" data-toggle="${sectionId}">
-        <h3>Perfil: ${profile.replaceAll("_", " ")}</h3>
+        <h3>Perfil: ${perfilParseado}</h3>
         <span class="arrow">▼</span>
       </div>
       <div class="profile-content inactive" id="${sectionId}"></div>
@@ -95,27 +98,65 @@ function renderProfiles(profiles) {
 
     const content = section.querySelector(".profile-content");
 
-    mapping.forEach((field) => {
-      const value = profileData[field.key] ?? "";
-      const uniqueId = `${field.key}-${Math.random()
-        .toString(36)
-        .substring(2, 5)}`;
+    mapping.forEach((field, subIndex) => {
+      if (field.type === "group") {
+        const groupId = `${sectionId}-group-${subIndex}`;
+        const groupWrapper = document.createElement("div");
+        groupWrapper.classList.add("group-section");
 
-      content.insertAdjacentHTML(
-        "beforeend",
-        `<div class="user__field">
-            <label>${field.label}</label>
-            <div class="input-wrapper">
-              <input type="text" readonly value="${value}" id="${uniqueId}">
-              <button class="copy-btn" data-target="${uniqueId}" title="Copiar">
-                <img src="../app/img/copy.svg" class="icon-copy"/>
-              </button>
-            </div>
-          </div>`
-      );
+        groupWrapper.innerHTML = `
+          <div class="group-header" data-toggle="${groupId}">
+            <h4>${field.label}</h4>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="group-content inactive" id="${groupId}"></div>
+        `;
+
+        content.appendChild(groupWrapper);
+
+        const groupContent = groupWrapper.querySelector(".group-content");
+
+        field.content.forEach((subField) => {
+          const value = profileData[subField.key] ?? "";
+          const uniqueId = `${subField.key}-${Math.random()
+            .toString(36)
+            .substring(2, 5)}`;
+
+          groupContent.insertAdjacentHTML(
+            "beforeend",
+            `<div class="user__field">
+                <label>${subField.label}</label>
+                <div class="input-wrapper">
+                  <input type="text" readonly value="${value}" id="${uniqueId}">
+                  <button class="copy-btn" data-target="${uniqueId}" title="Copiar">
+                    <img src="../app/img/copy.svg" class="icon-copy"/>
+                  </button>
+                </div>
+              </div>`
+          );
+        });
+      } else {
+        // campo plano
+        const value = profileData[field.key] ?? "";
+        const uniqueId = `${field.key}-${Math.random()
+          .toString(36)
+          .substring(2, 5)}`;
+
+        content.insertAdjacentHTML(
+          "beforeend",
+          `<div class="user__field">
+              <label>${field.label}</label>
+              <div class="input-wrapper">
+                <input type="text" readonly value="${value}" id="${uniqueId}">
+                <button class="copy-btn" data-target="${uniqueId}" title="Copiar">
+                  <img src="../app/img/copy.svg" class="icon-copy"/>
+                </button>
+              </div>
+            </div>`
+        );
+      }
     });
   });
-
 }
 
 document.addEventListener("click", function (e) {
@@ -128,7 +169,7 @@ document.addEventListener("click", function (e) {
     }
   }
 
-  const header = e.target.closest(".profile-header");
+  const header = e.target.closest(".group-header, .profile-header");
   if (header) {
     const contentId = header.getAttribute("data-toggle");
     const content = document.getElementById(contentId);

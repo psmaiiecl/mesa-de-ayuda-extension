@@ -205,13 +205,14 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #f3f3f3;
+  background: #b62632;
   border-bottom: 1px solid #ddd;
 }
 
 .profile-header h3 {
   margin: 0;
   font-size: 14px;
+  color: #fff;
 }
 
 .profile-header .arrow {
@@ -227,5 +228,40 @@ h2 {
 }
 
 .profile-content.inactive {
+  display: none;
+}
+
+.group-section {
+  border: 1px solid #eee;
+  border-radius: 4px;
+  margin: 6px 0;
+  background: #fafafa;
+}
+
+.group-header {
+  padding: 6px 10px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ddd;
+}
+
+.group-header h4 {
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+  color: #444;
+}
+
+.group-content {
+  padding: 6px 10px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.group-content.inactive {
   display: none;
 }
