@@ -12,16 +12,70 @@ h2 {
   color: #333;
 }
 
-.header {
-  background-color: #2c334d;
-  width: 100%;
-  padding: 7px 10px;
-  box-sizing: border-box;
-  min-height: 35px;
-  position: relative;
+.tab-option {
+  padding: 6px 14px;
+  border-radius: 6px 6px 0 0;
+  background: #2c334d;
+  color: #eaeaea;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+  user-select: none;
 }
 
-.profile{
+.tab-option:not(.selected):hover {
+  background: #3a4262;
+  color: #ffffff;
+}
+
+.tab-option.selected {
+  background: rgb(34, 55, 139);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2) inset, 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  background-color: #1f2436;
+  padding: 8px 10px;
+  position: relative;
+  border-bottom: 2px solid #1f2436;
+}
+
+.manual-panel {
+  background: #f2f2f2;
+  padding: 8px;
+  display: flex;
+  gap: 6px;
+}
+
+.manual-panel.inactive {
+  display: none;
+}
+
+#manual-rut {
+  flex: 1;
+  padding: 5px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#manual-search {
+  padding: 5px 10px;
+  background-color: #353e61;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#manual-search:hover {
+  background-color: #2c2f47;
+}
+
+.profile {
   color: #f0f0f0;
   margin: 0;
 }
@@ -37,7 +91,7 @@ h2 {
   transition-duration: 150ms;
 }
 
-.reload-button:hover{
+.reload-button:hover {
   scale: 1.1;
 }
 
@@ -136,7 +190,6 @@ h2 {
   }
 }
 
-
 .copy-wrapper {
   display: flex;
   align-items: center;
@@ -155,7 +208,7 @@ h2 {
   transition-duration: 150ms;
 }
 
-.copy-btn img{
+.copy-btn img {
   width: 100%;
   height: 100%;
 }
@@ -172,7 +225,7 @@ h2 {
 
 .input-wrapper input {
   width: 100%;
-  padding-right: 30px; 
+  padding-right: 30px;
   box-sizing: border-box;
 }
 
@@ -264,4 +317,34 @@ h2 {
 
 .group-content.inactive {
   display: none;
+}
+
+.auto-fill {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.fill-btn {
+  background: linear-gradient(135deg, #4cafef, #3b82f6);
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.fill-btn:hover {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+}
+
+.fill-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }

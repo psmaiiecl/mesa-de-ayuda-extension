@@ -8,11 +8,28 @@
 
   <body>
     <div class="header">
-      <!-- <h2 id="profile" class="profile"></h2> -->
+      <div class="tab-option selected" id="auto-tab">
+        <span>Ticket</span>
+      </div>
+      <div id="manual-tab" class="tab-option">
+        <span>Manual</span>
+      </div>
       <div class="reload-button" id="reload" title="Recargar Info. Ticket">
         <img src="./img/refresh.svg" alt="Refresh" srcset="" />
       </div>
     </div>
+    <div class="load-panel inactive" id="load-panel">
+      <div class="lds-dual-ring"></div>
+    </div>
+    <div class="manual-panel inactive" id="manual-panel">
+      <input
+        type="text"
+        id="manual-rut"
+        placeholder="Ingrese RUT (ej: 12345678-K)"
+      />
+      <button id="manual-search">Buscar</button>
+    </div>
+
     <div class="load-panel inactive" id="load-panel">
       <div class="lds-dual-ring"></div>
     </div>

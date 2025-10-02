@@ -12,7 +12,21 @@
       {
         "location": "desk.ticket.detail.rightpanel",
         "url": "/app/widget.html",
+        "name": "Informacion Docente Mas - Detalle Ticket",
+        "logo": "/app/img/logo.png",
+        "icon": "/app/img/icon.png"
+      },
+      {
+        "location": "desk.bottomband",
+        "url": "/app/widget.html",
         "name": "Informacion Docente Mas",
+        "logo": "/app/img/logo.png",
+        "icon": "/app/img/icon.png"
+      },
+      {
+        "location": "desk.ticket.form.rightpanel",
+        "url": "/app/widget.html",
+        "name": "Informacion Docente Mas - Formulario Ticket",
         "logo": "/app/img/logo.png",
         "icon": "/app/img/icon.png"
       }
