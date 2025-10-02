@@ -326,7 +326,7 @@ h2 {
 }
 
 .fill-btn {
-  background: linear-gradient(135deg, #4cafef, #3b82f6);
+  background: linear-gradient(135deg, #058325, rgb(36, 59, 5));
   border: none;
   border-radius: 6px;
   padding: 6px 14px;
@@ -339,7 +339,6 @@ h2 {
 }
 
 .fill-btn:hover {
-  background: linear-gradient(135deg, #3b82f6, #2563eb);
   transform: translateY(-1px);
   box-shadow: 0 3px 6px rgba(0,0,0,0.2);
 }
