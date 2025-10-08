@@ -1,5 +1,5 @@
 import "zd-styles/es/Button.css";
-import { profileMapping } from "./profileMapping";
+import { getDependencyFillMapper, getProfileFillMapper, profileMapping } from "./profileMapping";
 import { showLoader, hideLoader } from "./LoaderHelpers";
 import {
   displayInvalidRutAlert,
@@ -202,29 +202,50 @@ function manualSearch() {
 
 function fillTicketForm(data) {
   ZOHODESK.get("ticketForm.fields")
-    .then(function (fieldsResponse) {
+    .then(async function (fieldsResponse) {
       console.log(fieldsResponse);
-      console.log(fieldsResponse["ticketForm.fields"]);
-      if (data.rut) {
-        ZOHODESK.set("ticketForm.cf_rut", {
-          value: `${data.rut}-${data.dv || ""}`,
-        });
-      }
-      if (data.nombres) {
-        ZOHODESK.set("ticketForm.contactId", {
-          value: `${data.nombres} ${data.primer_apellido || ""} ${
-            data.segundo_apellido || ""
-          }`,
-        });
-      }
+
+      // if (data.nombre_completo) {
+      //    await ZOHODESK.set("ticketForm.contactId", {
+      //      value: data.nombre_completo,
+      //    });
+      //  }
+
       if (data.correo_electronico) {
-        ZOHODESK.set("ticketForm.email", {
+        await ZOHODESK.set("ticketForm.email", {
           value: data.correo_electronico,
         });
       }
-      if (data.numero_contacto_1) {
-        ZOHODESK.set("ticketForm.phone", { value: data.numero_contacto_1 });
+
+      if (data.rut) {
+        await ZOHODESK.set("ticketForm.cf_rut", {
+          value: `${data.rut}-${data.dv || ""}`,
+        });
       }
+
+      if (data.numero_contacto_1) {        
+        await ZOHODESK.set("ticketForm.phone", {
+          value: ""+data.numero_contacto_1,
+        });
+      }
+      
+      const perfil = data?.perfil.toLowerCase() || "no_identificado";
+      await ZOHODESK.set("ticketForm.cf_perfil_de_solicitud", {
+        value: getProfileFillMapper(perfil),
+      });
+
+      if(data.dependencia){
+        await ZOHODESK.set("ticketForm.cf_dependencia", {
+          value: getDependencyFillMapper(data.dependencia || ""),
+        });
+      }
+
+      if(data.rbd){
+        await ZOHODESK.set("ticketForm.cf_rbd", {
+          value: data.rbd || "",
+        });
+      }
+
     })
     .catch(function (error) {
       unableToFill();

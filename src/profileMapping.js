@@ -6,9 +6,7 @@ export const profileMapping = {
       content: [
         { key: "rut", label: "RUT" },
         { key: "dv", label: "Dígito Verificador" },
-        { key: "nombres", label: "Nombres" },
-        { key: "primer_apellido", label: "Primer Apellido" },
-        { key: "segundo_apellido", label: "Segundo Apellido" },
+        { key: "nombre_completo", label: "Nombre Completo" },
         { key: "correo_electronico", label: "Email" },
         { key: "numero_contacto_1", label: "Teléfono" },
         { key: "numero_contacto_2", label: "Teléfono Alternativo" },
@@ -52,9 +50,7 @@ export const profileMapping = {
       content: [
         { key: "rut", label: "RUT" },
         { key: "dv", label: "Dígito Verificador" },
-        { key: "nombres", label: "Nombres" },
-        { key: "primer_apellido", label: "Primer Apellido" },
-        { key: "segundo_apellido", label: "Segundo Apellido" },
+        { key: "nombre_completo", label: "Nombre Completo" },
         { key: "correo_electronico", label: "Email" },
         { key: "numero_contacto_1", label: "Teléfono" },
       ],
@@ -80,9 +76,7 @@ export const profileMapping = {
       content: [
         { key: "rut", label: "RUT" },
         { key: "dv", label: "Dígito Verificador" },
-        { key: "nombres", label: "Nombres" },
-        { key: "primer_apellido", label: "Primer Apellido" },
-        { key: "segundo_apellido", label: "Segundo Apellido" },
+        { key: "nombre_completo", label: "Nombre Completo" },
         { key: "correo_electronico", label: "Email" },
         { key: "numero_contacto_1", label: "Teléfono" },
       ],
@@ -107,9 +101,7 @@ export const profileMapping = {
       content: [
         { key: "rut", label: "RUT" },
         { key: "dv", label: "Dígito Verificador" },
-        { key: "nombres", label: "Nombres" },
-        { key: "primer_apellido", label: "Primer Apellido" },
-        { key: "segundo_apellido", label: "Segundo Apellido" },
+        { key: "nombre_completo", label: "Nombre Completo" },
         { key: "correo_electronico", label: "Email" },
         { key: "numero_contacto_1", label: "Teléfono" },
       ],
@@ -134,9 +126,7 @@ export const profileMapping = {
       content: [
         { key: "rut", label: "RUT" },
         { key: "dv", label: "Dígito Verificador" },
-        { key: "nombres", label: "Nombres" },
-        { key: "primer_apellido", label: "Primer Apellido" },
-        { key: "segundo_apellido", label: "Segundo Apellido" },
+        { key: "nombre_completo", label: "Nombre Completo" },
         { key: "correo_electronico", label: "Email" },
         { key: "numero_contacto_1", label: "Teléfono" },
       ],
@@ -160,3 +150,57 @@ export const profileMapping = {
     { key: "dv", label: "Dígito Verificador" },
   ],
 };
+
+export function getProfileFillMapper(profile) {
+  switch (profile) {
+    case "docente":
+      return "Docente o Educador/a";
+      break;
+    case "representante":
+      return "Sostenedor/a o Encargado/a de Evaluación";
+      break;
+    case "encargado":
+      return "Sostenedor/a o Encargado/a de Evaluación";
+      break;
+    case "director":
+      return "Director/a";
+      break;
+    case "coordinador_grabacion":
+      return "Coordinador/a de Grabaciones";
+      break;
+    default:
+      return "--Ninguna--";
+      break;
+  }
+}
+
+export function getDependencyFillMapper(dependency) {
+  switch (dependency) {
+    case "INTEGRA":
+    case "JUNJI":
+      return "Jardines Infantiles";
+
+    case "Municipal - DAEM":
+    case "Municipal Corporación":
+    case "Parvulo - Servicio Local de Educación (SLE)":
+    case "Servicio Local de Educación":
+    case "Vía Transferencia de Fondos":
+      return "Municipal y Servicio Local de Educación";
+
+    case "Administración Delegada":
+    case "Convenio de Administración Delegada":
+    case "Particular Subvencionado":
+      return "Part. Subvencionado y Adm. Delegada";
+
+    case "Sin Información":
+      return "Otro";
+
+    case null:
+    case undefined:
+    case "":
+      return "--Ninguna--";
+
+    default:
+      return "--Ninguna--";
+  }
+}
