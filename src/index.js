@@ -1,5 +1,9 @@
 import "zd-styles/es/Button.css";
-import { getDependencyFillMapper, getProfileFillMapper, profileMapping } from "./profileMapping";
+import {
+  getDependencyFillMapper,
+  getProfileFillMapper,
+  profileMapping,
+} from "./profileMapping";
 import { showLoader, hideLoader } from "./LoaderHelpers";
 import {
   displayInvalidRutAlert,
@@ -102,10 +106,38 @@ function renderProfiles(profiles) {
             getFieldBlueprint(subField.label, value, subField.key)
           );
         });
+      } else if (field.type === "benefits") {
+        const benefitsWrapper = document.createElement("div");
+        benefitsWrapper.classList.add("benefits-section");
+
+        benefitsWrapper.innerHTML = `
+          <div class="benefits-label">${field.label}</div>
+          <div class="benefits-chips"></div>
+        `;
+
+        const chipsContainer = benefitsWrapper.querySelector(".benefits-chips");
+
+        field.content.forEach((benefit) => {
+          const tiene = profileData[benefit.key] || null;
+          const acoge = profileData[benefit.acogidoKey] || null;
+
+          let colorClass = "chip-none";
+          if (tiene === "Sí" && acoge === "Sí") {
+            colorClass = "chip-accepted"; 
+          } else if (tiene === "Sí" && acoge === "No") {
+            colorClass = "chip-has"; 
+          } 
+
+          const chip = document.createElement("span");
+          chip.classList.add("benefit-chip", colorClass);
+          chip.textContent = benefit.label;
+          chipsContainer.appendChild(chip);
+        });
+
+        content.appendChild(benefitsWrapper);
       } else {
         // campo plano
         const value = profileData[field.key] ?? "";
-
         content.insertAdjacentHTML(
           "beforeend",
           getFieldBlueprint(field.label, value, field.key)
@@ -223,29 +255,28 @@ function fillTicketForm(data) {
         });
       }
 
-      if (data.numero_contacto_1) {        
+      if (data.numero_contacto_1) {
         await ZOHODESK.set("ticketForm.phone", {
-          value: ""+data.numero_contacto_1,
+          value: "" + data.numero_contacto_1,
         });
       }
-      
+
       const perfil = data?.perfil.toLowerCase() || "no_identificado";
       await ZOHODESK.set("ticketForm.cf_perfil_de_solicitud", {
         value: getProfileFillMapper(perfil),
       });
 
-      if(data.dependencia){
+      if (data.dependencia) {
         await ZOHODESK.set("ticketForm.cf_dependencia", {
           value: getDependencyFillMapper(data.dependencia || ""),
         });
       }
 
-      if(data.rbd){
+      if (data.rbd) {
         await ZOHODESK.set("ticketForm.cf_rbd", {
           value: data.rbd || "",
         });
       }
-
     })
     .catch(function (error) {
       unableToFill();
