@@ -25,23 +25,27 @@ export const profileMapping = {
         // { key: "a19ñ", label: "Beneficio: 19Ñ" },
         // { key: "avolun", label: "Beneficio: Tramo Voluntario" },
         // { key: "uaplaza", label: "Beneficio: Aplazamiento Proceso Evaluativo" },
+        {
+          type: "benefits",
+          label: "Beneficios (Acogido / No Acogido)",
+          content: [
+            { key: "t19n", label: "Artículo 19Ñ", acogidoKey: "a19ñ" },
+            { key: "pvolun", label: "Tramo Voluntario", acogidoKey: "avolun" },
+            {
+              key: "taplaza",
+              label: "Aplazamiento Proceso 2024",
+              acogidoKey: "uaplaza",
+            },
+            {
+              key: "tienepf2022",
+              label: "Portafolio Corregido",
+              acogidoKey: null,
+            },
+          ],
+        },
         { key: "estado_susp", label: "Estado Solicitud Suspensión" },
         { key: "estado_grab_raptor", label: "Grabación (Raptor)" },
         { key: "estado_grab_dmas", label: "Grabación (D+)" },
-      ],
-    },
-    {
-      type: "benefits",
-      label: "Beneficios (Acogido / No Acogido)",
-      content: [
-        { key: "t19n", label: "Artículo 19 Ñ", acogidoKey: "a19ñ" },
-        { key: "pvolun", label: "Tramo Voluntario", acogidoKey: "avolun" },
-        {
-          key: "taplaza",
-          label: "Aplazamiento Proceso 2024",
-          acogidoKey: "uaplaza",
-        },
-        { key: "tienepf2022", label: "Portafolio Corregido", acogidoKey: null },
       ],
     },
     {

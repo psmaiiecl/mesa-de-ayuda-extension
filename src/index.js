@@ -99,42 +99,43 @@ function renderProfiles(profiles) {
         const groupContent = groupWrapper.querySelector(".group-content");
 
         field.content.forEach((subField) => {
-          const value = profileData[subField.key] ?? "";
+          if (subField.type === "benefits") {
+            const benefitsWrapper = document.createElement("div");
+            benefitsWrapper.classList.add("benefits-section");
 
-          groupContent.insertAdjacentHTML(
-            "beforeend",
-            getFieldBlueprint(subField.label, value, subField.key)
-          );
+            benefitsWrapper.innerHTML = `
+              <div class="benefits-label">${subField.label}</div>
+              <div class="benefits-chips"></div>
+            `;
+
+            const chipsContainer =
+              benefitsWrapper.querySelector(".benefits-chips");
+
+            subField.content.forEach((benefit) => {
+              const tiene = profileData[benefit.key] || null;
+              const acoge = profileData[benefit.acogidoKey] || null;
+
+              let colorClass = "chip-none";
+              if (tiene === "Sí" && acoge === "Sí") {
+                colorClass = "chip-accepted"; // verde
+              } else if (tiene === "Sí" && acoge === "No") {
+                colorClass = "chip-has"; // rojo
+              }
+
+              const chip = document.createElement("span");
+              chip.classList.add("benefit-chip", colorClass);
+              chip.textContent = benefit.label;
+              chipsContainer.appendChild(chip);
+            });
+            groupContent.appendChild(benefitsWrapper);
+          } else {
+            const value = profileData[subField.key] ?? "";
+            groupContent.insertAdjacentHTML(
+              "beforeend",
+              getFieldBlueprint(subField.label, value, subField.key)
+            );
+          }
         });
-      } else if (field.type === "benefits") {
-        const benefitsWrapper = document.createElement("div");
-        benefitsWrapper.classList.add("benefits-section");
-
-        benefitsWrapper.innerHTML = `
-          <div class="benefits-label">${field.label}</div>
-          <div class="benefits-chips"></div>
-        `;
-
-        const chipsContainer = benefitsWrapper.querySelector(".benefits-chips");
-
-        field.content.forEach((benefit) => {
-          const tiene = profileData[benefit.key] || null;
-          const acoge = profileData[benefit.acogidoKey] || null;
-
-          let colorClass = "chip-none";
-          if (tiene === "Sí" && acoge === "Sí") {
-            colorClass = "chip-accepted"; 
-          } else if (tiene === "Sí" && acoge === "No") {
-            colorClass = "chip-has"; 
-          } 
-
-          const chip = document.createElement("span");
-          chip.classList.add("benefit-chip", colorClass);
-          chip.textContent = benefit.label;
-          chipsContainer.appendChild(chip);
-        });
-
-        content.appendChild(benefitsWrapper);
       } else {
         // campo plano
         const value = profileData[field.key] ?? "";
