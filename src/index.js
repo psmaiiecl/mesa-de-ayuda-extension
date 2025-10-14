@@ -118,7 +118,7 @@ function renderProfiles(profiles) {
               let colorClass = "chip-none";
               if (tiene === "Sí" && acoge === "Sí") {
                 colorClass = "chip-accepted"; // verde
-              } else if (tiene === "Sí" && acoge === "No") {
+              } else if (tiene === "Sí" && (acoge === "No" || !acoge)) {
                 colorClass = "chip-has"; // rojo
               }
 

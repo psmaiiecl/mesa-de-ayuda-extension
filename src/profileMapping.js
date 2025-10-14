@@ -39,7 +39,7 @@ export const profileMapping = {
             {
               key: "tienepf2022",
               label: "Portafolio Corregido",
-              acogidoKey: null,
+              acogidoKey: "tienepf2022",
             },
           ],
         },
