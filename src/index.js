@@ -47,10 +47,10 @@ function renderProfiles(profiles) {
   profiles.forEach((profileData, index) => {
     const profile = profileData.perfil?.toLowerCase() || "no_identificado";
     const mapping = profileMapping[profile] || profileMapping.no_identificado;
-    if (profile === "no_identificado") {
-      const messages = profileData?.alerta_operador;
-      displayUnknownProfileAlert(messages);
-    }
+    // if (profile === "no_identificado") {
+    //   const messages = profileData?.alerta_operador;
+    //   displayUnknownProfileAlert(messages);
+    // }
 
     const sectionId = `profile-${index}`;
     const section = document.createElement("div");

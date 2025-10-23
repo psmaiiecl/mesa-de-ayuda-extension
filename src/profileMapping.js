@@ -44,8 +44,10 @@ export const profileMapping = {
           ],
         },
         { key: "estado_susp", label: "Estado Solicitud Suspensión" },
+        { key: "fecha_agendamiento", label: "Fecha de agendamiento" },
         { key: "estado_grab_raptor", label: "Grabación (Raptor)" },
         { key: "estado_grab_dmas", label: "Grabación (D+)" },
+        { key: "seguimiento_sd", label: "Seguimiento SD" },
       ],
     },
     {
