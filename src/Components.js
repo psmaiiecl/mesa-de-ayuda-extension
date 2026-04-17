@@ -1,17 +1,30 @@
 export function getProfileBlueprint(perfil, sectionId) {
   return `
     <div class="profile-header" data-toggle="${sectionId}">
-        <h3>Perfil: ${perfil}</h3>
-        <span class="arrow">▼</span>
+      <div class="profile-data">
+        <div class="profile-icon">
+          <img src='./img/profile.svg' />
+        </div>
+        <div class="profile-title">
+          <span>
+            Perfil
+          </span>
+          <br/>
+          <span class="profile-name">
+            ${perfil}
+          </span>
+        </div>
       </div>
-      <div class="profile-content inactive" id="${sectionId}"></div>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="profile-content inactive" id="${sectionId}"></div>
   `;
 }
 
 export function getGroupBlueprint(label, groupId) {
   return `
         <div class="group-header" data-toggle="${groupId}">
-        <h4>${label}</h4>
+        <span>${label}</span>
         <span class="arrow">▼</span>
         </div>
         <div class="group-content inactive" id="${groupId}"></div>
