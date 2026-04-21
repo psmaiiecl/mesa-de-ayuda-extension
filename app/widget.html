@@ -1,46 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="./style/style.css" />
-    <title>Zoho Desk - Apps</title>
-  </head>
 
-  <body>
-    <div class="header">
-      <div class="header-title-container">
-        <span>Información DocenteMás</span>
-        <div class="reload-button" id="reload" title="Recargar Info. Ticket">
-          <!-- <img src="./img/refresh.svg" alt="Refresh" srcset="" /> -->
-          <svg fill="#f0f0f0"  viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M27.1 14.313V5.396L24.158 8.34c-2.33-2.325-5.033-3.503-8.11-3.503C9.902 4.837 4.901 9.847 4.899 16c.001 6.152 5.003 11.158 11.15 11.16 4.276 0 9.369-2.227 10.836-8.478l.028-.122h-3.23l-.022.068c-1.078 3.242-4.138 5.421-7.613 5.421a8 8 0 0 1-5.691-2.359A7.993 7.993 0 0 1 8 16.001c0-4.438 3.611-8.049 8.05-8.049 2.069 0 3.638.58 5.924 2.573l-3.792 3.789H27.1z"/></svg>
-        </div>
-      </div>
-      <div class="tab-options-container">
-        <div class="tab-option selected" id="auto-tab">
-          <span>Ticket</span>
-        </div>
-        <div id="manual-tab" class="tab-option">
-          <span>Manual</span>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="./style/style.css" />
+  <title>Zoho Desk - Apps</title>
+</head>
+
+<body>
+  <div class="header">
+    <div class="header-title-container">
+      <span>Información DocenteMás</span>
+      <div class="reload-button" id="reload" title="Recargar Info. Ticket">
+        <!-- <img src="./img/refresh.svg" alt="Refresh" srcset="" /> -->
+        <svg fill="#fff" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 30 30">
+          <path
+            d="M 15 3 C 12.031398 3 9.3028202 4.0834384 7.2070312 5.875 A 1.0001 1.0001 0 1 0 8.5058594 7.3945312 C 10.25407 5.9000929 12.516602 5 15 5 C 20.19656 5 24.450989 8.9379267 24.951172 14 L 22 14 L 26 20 L 30 14 L 26.949219 14 C 26.437925 7.8516588 21.277839 3 15 3 z M 4 10 L 0 16 L 3.0507812 16 C 3.562075 22.148341 8.7221607 27 15 27 C 17.968602 27 20.69718 25.916562 22.792969 24.125 A 1.0001 1.0001 0 1 0 21.494141 22.605469 C 19.74593 24.099907 17.483398 25 15 25 C 9.80344 25 5.5490109 21.062074 5.0488281 16 L 8 16 L 4 10 z">
+          </path>
+        </svg>
       </div>
     </div>
-    <div class="load-panel inactive" id="load-panel">
-      <div class="lds-dual-ring"></div>
-    </div>
-    <div class="manual-panel inactive" id="manual-panel">
-      <input
-        type="text"
-        id="manual-rut"
-        placeholder="Ingrese RUT (ej: 12345678-K)"
-      />
-      <button id="manual-search">Buscar</button>
+    <div class="version-selector">
+      <select id="yearSelector">
+        <option value="2025">2025</option>
+        <option value="2026">2026</option>
+      </select>
     </div>
 
-    <div class="load-panel inactive" id="load-panel">
-      <div class="lds-dual-ring"></div>
+    <div class="tab-options-container">
+      <div class="tab-option selected" id="auto-tab">
+        <span>Ticket</span>
+      </div>
+      <div id="manual-tab" class="tab-option">
+        <span>Manual</span>
+      </div>
     </div>
-    <div class="user-info"></div>
-    <script src="https://js.zohostatic.com/support/developer_sdk/v1/js/ZohoDeskClientSDK.min.js"></script>
-    <script src="./js/extension.js" charset="utf-8"></script>
-  </body>
+  </div>
+  <div class="load-panel inactive" id="load-panel">
+    <div class="lds-dual-ring"></div>
+  </div>
+  <div class="manual-panel inactive" id="manual-panel">
+    <input type="text" id="manual-rut" placeholder="Ingrese RUT (ej: 12345678-K)" />
+    <button id="manual-search">Buscar</button>
+  </div>
+
+  <div class="load-panel inactive" id="load-panel">
+    <div class="lds-dual-ring"></div>
+  </div>
+  <div class="user-info"></div>
+  <script src="https://js.zohostatic.com/support/developer_sdk/v1/js/ZohoDeskClientSDK.min.js"></script>
+  <script src="./js/extension.js" charset="utf-8"></script>
+</body>
+
 </html>

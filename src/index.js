@@ -15,6 +15,20 @@ import {
   getProfileBlueprint,
 } from "./Components";
 
+let selectedYear = 2026;
+
+document.addEventListener("DOMContentLoaded", () => {
+  const yearSelector = document.getElementById("yearSelector");
+
+  selectedYear = parseInt(yearSelector.value);
+
+  yearSelector.addEventListener("change", (e) => {
+    selectedYear = parseInt(e.target.value);
+    console.log("Año seleccionado:", selectedYear);
+    // refreshData();
+  });
+});
+
 //Botón de recarga + evento
 document.getElementById("reload").addEventListener("click", () => {
   loadTicket();
@@ -72,7 +86,7 @@ function renderProfiles(profiles) {
           "afterbegin",
           `<div class="auto-fill">
              <button class="fill-btn" data-index="${index}">Completar</button>
-           </div>`
+           </div>`,
         );
 
         const fillBtn = section.querySelector(".fill-btn");
@@ -132,7 +146,7 @@ function renderProfiles(profiles) {
             const value = profileData[subField.key] ?? "";
             groupContent.insertAdjacentHTML(
               "beforeend",
-              getFieldBlueprint(subField.label, value, subField.key)
+              getFieldBlueprint(subField.label, value, subField.key),
             );
           }
         });
@@ -141,7 +155,7 @@ function renderProfiles(profiles) {
         const value = profileData[field.key] ?? "";
         content.insertAdjacentHTML(
           "beforeend",
-          getFieldBlueprint(field.label, value, field.key)
+          getFieldBlueprint(field.label, value, field.key),
         );
       }
     });
@@ -164,7 +178,7 @@ document.addEventListener("click", function (e) {
     const content = document.getElementById(contentId);
     content.classList.toggle("inactive");
     header.querySelector(".arrow").textContent = content.classList.contains(
-      "inactive"
+      "inactive",
     )
       ? "▼"
       : "▲";
@@ -202,11 +216,15 @@ document.getElementById("manual-rut").addEventListener("keydown", (e) => {
 
 function fetchInfo(rut) {
   showLoader();
-  const BASE_URL =
-    "https://devrrhh.iie.cl/rrhh_api/edd-dashboard/proxy-docente-mas?rut=";
+
+  const year = selectedYear;
+
+  const BASE_URL = `https://dashboard-edd.iie.cl/back/public/api2025/2025-persona-mesa-ayuda?rut=${rut}&year=${year}`;
+  // "https://devrrhh.iie.cl/rrhh_api/edd-dashboard/proxy-docente-mas?rut=";
+  console.log("fetching", BASE_URL);
 
   let requestConfig = {
-    url: BASE_URL + rut,
+    url: BASE_URL,
     type: "GET",
     postBody: {},
     headers: { "Content-Type": "application/json" },
