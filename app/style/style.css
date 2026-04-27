@@ -518,7 +518,7 @@ h2 {
   height: 32px;
   border: none;
   border-radius: 6px;
-  background-color: #2d5bff;
+  background-color: #0d570d;
   color: #fff;
   font-size: 13px;
   cursor: pointer;
@@ -526,7 +526,7 @@ h2 {
 }
 
 .brevo-btn:hover {
-  background-color: #1f47d6;
+  background-color: #127712;
 }
 
 .brevo-btn:disabled {
@@ -557,6 +557,83 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 4px;
+}
+
+.campaign-title {
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.campaign-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  margin-top: 6px;
+  border: 1px solid #e5e7eb;
+}
+
+.campaign-main {
+  margin-bottom: 10px;
+}
+
+.campaign-field label {
+  font-size: 10px;
+  color: #6b7280;
+  display: block;
+}
+
+.campaign-field .value {
+  font-size: 12px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+.campaign-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.stat {
+  background: #f9fafb;
+  border-radius: 6px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+}
+
+.stat .label {
+  font-size: 9px;
+  color: #6b7280;
+}
+
+.stat .value {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.stat.highlight {
+  background: #ecfeff;
+  color: #0f766e;
+}
+
+.campaign-actions {
+  text-align: right;
+}
+
+.template-btn {
+  background: #374151;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.template-btn:hover {
+  background: #111827;
 }
 
 .template-btn {

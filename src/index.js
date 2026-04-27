@@ -15,7 +15,7 @@ import {
   getProfileBlueprint,
 } from "./Components";
 
-let selectedYear = 2026;
+let selectedYear = 2025;
 
 document.addEventListener("DOMContentLoaded", () => {
   const yearSelector = document.getElementById("yearSelector");
@@ -243,7 +243,8 @@ function fetchInfo(rut) {
 
   const year = selectedYear;
 
-  const BASE_URL = `https://dashboard-edd.iie.cl/back/public/api2025/2025-persona-mesa-ayuda?rut=${rut}&year=${year}`;
+  // const BASE_URL = `https://dashboard-edd.iie.cl/back/public/api2025/2025-persona-mesa-ayuda?rut=${rut}&year=${year}`;
+  const BASE_URL = `https://dashboard-edd.iie.cl/back/public/api2026/integraciones/busqueda/persona?rut=${rut}&year=${year}`;
   // "https://devrrhh.iie.cl/rrhh_api/edd-dashboard/proxy-docente-mas?rut=";
   console.log("fetching", BASE_URL);
 
@@ -327,24 +328,31 @@ function fillTicketForm(data) {
 }
 
 //BREVO
-
 async function fetchBrevoCampaigns(email, sectionId) {
+  // const proxyUrl = "https://devrrhh.iie.cl/rrhh_api/edd-dashboard/proxy";
+  // const target =
+  //   "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2026/integraciones/brevo/participant";
+  // const response = await fetch(
+  //   `${proxyUrl}?url=${encodeURIComponent(target)}&email=${encodeURIComponent(email)}`,
+  // );
   console.log("Llamando API Brevo con:", email);
 
-  const proxyUrl = "https://devrrhh.iie.cl/rrhh_api/edd-dashboard/proxy";
-  const target =
-    "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2026/integraciones/brevo/participant";
+  const url = `https://dashboard-edd.iie.cl/back/public/api2026/integraciones/brevo/participant?email=${encodeURIComponent(email)}`;
+
+  const requestConfig = {
+    url,
+    type: "GET",
+    postBody: {},
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
   try {
-    const response = await fetch(
-      `${proxyUrl}?url=${encodeURIComponent(target)}&email=${encodeURIComponent(email)}`,
-    );
+    const res = await ZOHODESK.request(requestConfig);
 
-    if (!response.ok) {
-      throw new Error(`Error HTTP: ${response.status}`);
-    }
-
-    const data = await response.json();
+    let data = JSON.parse(res).response;
+    data = JSON.parse(data);
 
     console.log("Respuesta Brevo:", data);
 
@@ -391,28 +399,55 @@ function renderBrevoCampaigns(data, sectionId, email) {
     campaignEl.classList.add("campaign-item");
 
     campaignEl.innerHTML = `
-      <div class="group-header" data-toggle="${campaignId}">
-        <span>${campaign.nombre}</span>
-        <span class="arrow">▼</span>
-      </div>
-      <div class="group-content inactive" id="${campaignId}">
+  <div class="group-header" data-toggle="${campaignId}">
+    <span class="campaign-title">${campaign.nombre}</span>
+    <span class="arrow">▼</span>
+  </div>
+
+  <div class="group-content inactive" id="${campaignId}">
+    
+    <div class="campaign-card">
+      
+      <div class="campaign-main">
         <div class="campaign-field">
           <label>Asunto</label>
-          <div>${campaign.asunto || "-"}</div>
+          <div class="value">${campaign.asunto || "-"}</div>
         </div>
+
         <div class="campaign-field">
           <label>Sender</label>
-          <div>${campaign.sender || "-"}</div>
+          <div class="value">${campaign.sender || "-"}</div>
+        </div>
+      </div>
+
+      <div class="campaign-stats">
+        <div class="stat">
+          <span class="label">Enviado</span>
+          <span class="value">${campaign.eventos.enviado || "-"}</span>
         </div>
 
-        <div class="campaign-events">
-          <div><strong>Enviado:</strong> ${campaign.eventos.enviado || "-"}</div>
-          <div><strong>Entregado:</strong> ${campaign.eventos.entregado || "-"}</div>
-          <div><strong>Aperturas:</strong> ${campaign.eventos.aperturas}</div>
-          <div><strong>Última apertura:</strong> ${campaign.eventos.ultima_apertura || "-"}</div>
-          <div><strong>Clicks:</strong> ${campaign.eventos.clicks}</div>
+        <div class="stat">
+          <span class="label">Entregado</span>
+          <span class="value">${campaign.eventos.entregado || "-"}</span>
         </div>
 
+        <div class="stat highlight">
+          <span class="label">Aperturas</span>
+          <span class="value">${campaign.eventos.aperturas}</span>
+        </div>
+
+        <div class="stat">
+          <span class="label">Última apertura</span>
+          <span class="value">${campaign.eventos.ultima_apertura || "-"}</span>
+        </div>
+
+        <div class="stat highlight">
+          <span class="label">Clicks</span>
+          <span class="value">${campaign.eventos.clicks}</span>
+        </div>
+      </div>
+
+      <div class="campaign-actions">
         <button 
           class="template-btn" 
           data-id="${campaign.campaign_id}"
@@ -421,12 +456,14 @@ function renderBrevoCampaigns(data, sectionId, email) {
           Ver template
         </button>
       </div>
-    `;
+
+    </div>
+  </div>
+`;
 
     content.appendChild(campaignEl);
   });
 
-  // attachToggleEvents();
   attachTemplateEvents(wrapper);
 }
 
@@ -437,21 +474,31 @@ function attachTemplateEvents(wrapper) {
     btn.addEventListener("click", () => {
       const campaignId = btn.dataset.id;
       const email = btn.dataset.email;
-
-      const proxyUrl = "https://devrrhh.iie.cl/rrhh_api/edd-dashboard/proxy";
-
-      const target =
-        "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2026/integraciones/brevo/participant/overview";
-
-      const finalUrl = `${proxyUrl}?url=${encodeURIComponent(target)}&email=${encodeURIComponent(email)}&id_campaña=${encodeURIComponent(campaignId)}`;
-
-      window.open(finalUrl, "_blank", "noopener,noreferrer");
+      fetchBrevoTemplate(campaignId, email);
     });
   });
 }
 
-async function fetchBrevoTemplate(campaignId) {
-  console.log("Fetching template for:", campaignId);
+// function fetchBrevoTemplate(campaignId, contactEmail) {
+//   // const proxyUrl = "https://devrrhh.iie.cl/rrhh_api/edd-dashboard/proxy";
 
-  // aquí después conectamos con endpoint real
+//   // const target =
+//   //   "http://api-docentemas-dev.3htp.cloud:8095/back/public/api2026/integraciones/brevo/participant/overview";
+
+//   const url = 'https://dashboard-edd.iie.cl/back/public/api2026/integraciones/brevo/participant/overview'
+//   // const finalUrl = `${proxyUrl}?url=${encodeURIComponent(target)}&email=${encodeURIComponent(contactEmail)}&id_campaña=${encodeURIComponent(campaignId)}`;
+//   const finalUrl = `${url}?email=${encodeURIComponent(contactEmail)}&id_campaña=${encodeURIComponent(campaignId)}`;
+
+//   window.open(finalUrl, "_blank", "noopener,noreferrer");
+// }
+
+function fetchBrevoTemplate(campaignId, contactEmail) {
+  const baseUrl =
+    "https://dashboard-edd.iie.cl/back/public/api2026/integraciones/brevo/participant/overview";
+
+  const finalUrl = `${baseUrl}?email=${encodeURIComponent(
+    contactEmail,
+  )}&id_campaña=${encodeURIComponent(campaignId)}`;
+
+  window.open(finalUrl, "_blank", "noopener,noreferrer");
 }
