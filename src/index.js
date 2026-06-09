@@ -142,6 +142,31 @@ function renderProfiles(profiles) {
               chipsContainer.appendChild(chip);
             });
             groupContent.appendChild(benefitsWrapper);
+          }
+          if (subField.type === "chips") {
+            const chipWrapper = document.createElement("div");
+            chipWrapper.classList.add("benefits-section");
+
+            chipWrapper.innerHTML = `
+              <div class="benefits-label">${subField.label}</div>
+              <div class="benefits-chips"></div>
+            `;
+
+            const chipsContainer = chipWrapper.querySelector(".benefits-chips");
+
+            subField.content.forEach((field) => {
+              const tiene = profileData[field.key] || null;
+
+              let colorClass = "chip-has";
+              if (tiene === true) {
+                colorClass = "chip-accepted"; // verde
+              }
+              const chip = document.createElement("span");
+              chip.classList.add("benefit-chip", colorClass);
+              chip.textContent = field.label;
+              chipsContainer.appendChild(chip);
+            });
+            groupContent.appendChild(chipWrapper);
           } else {
             const value = profileData[subField.key] ?? "";
             groupContent.insertAdjacentHTML(

@@ -52,6 +52,27 @@ export const profileMapping = {
     },
     {
       type: "group",
+      label: "Información Solicitudes",
+      content:[
+        {
+          type: "chips",
+          label: "Solicitudes realizadas",
+          content: [
+            { key: "tiene_vse", label: "Susp/Ex" },
+            { key: "tiene_vrbd", label: "Cambio EE" },
+            { key: "tiene_vasig", label: "Ag/Asig" },
+          ],
+        },
+        { key: "estado_susp", label: "Estado Solicitud Suspensión" },
+        { key: "intentos_estado_susp", label: "# Solicitud Suspensión" },
+        { key: "estado_rbd", label: "Estado Solicitud EE" },
+        { key: "intentos_estado_rbd", label: "# Solicitud EE" },
+        { key: "estado_asig", label: "Estado Solicitud Asig" },
+        { key: "intentos_estado_asig", label: "# Solicitud Asig" },
+      ]
+    },
+    {
+      type: "group",
       label: "Información EE y Sostenedor",
       content: [
         { key: "rbd", label: "RBD" },
