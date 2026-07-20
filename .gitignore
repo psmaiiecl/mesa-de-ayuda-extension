@@ -5,3 +5,5 @@ node_modules/
 dist/
 app/js/extension.js
 *.zip
+
+CLAUDE.md

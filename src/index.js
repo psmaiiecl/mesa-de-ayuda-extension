@@ -2,7 +2,7 @@ import "zd-styles/es/Button.css";
 import {
   getDependencyFillMapper,
   getProfileFillMapper,
-  profileMapping,
+  getProfileFields,
 } from "./profileMapping";
 import { showLoader, hideLoader } from "./LoaderHelpers";
 import {
@@ -60,7 +60,7 @@ function renderProfiles(profiles) {
 
   profiles.forEach((profileData, index) => {
     const profile = profileData.perfil?.toLowerCase() || "no_identificado";
-    const mapping = profileMapping[profile] || profileMapping.no_identificado;
+    const mapping = getProfileFields(selectedYear, profile);
     // if (profile === "no_identificado") {
     //   const messages = profileData?.alerta_operador;
     //   displayUnknownProfileAlert(messages);
